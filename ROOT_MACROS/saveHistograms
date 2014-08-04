@@ -1,0 +1,77 @@
+#!/bin/bash
+#
+# Automatically extracts all histograms
+# from a root file and saves them as image files.
+# Creates a directory structure exactly as found
+# in the root file itself.
+#
+# Michael Anderson
+# May 22, 2008
+
+# This must point to the ROOT macro
+plotMacro=./saveHistograms.C
+
+# Default image size
+defaultXsize=480
+defaultYsize=360
+
+
+printUsage() {
+ echo
+ echo "Saves all histograms from a root file into images"
+ echo "Usage:  saveHistograms file.root"
+ echo "        saveHistograms file.root imageType"
+ echo "        saveHistograms file.root imageType xSize ySize"
+ echo "example:"
+ echo "        saveHistograms jets.root gif $defaultXsize $defaultYsize"
+}
+
+# Call the ROOT macro with 4 arguments arguments
+saveHistFromRootFile() {
+  rootFile=$1
+  imageType=$2
+  xSize=$3
+  ySize=$4
+
+  echo "Saving histograms from $rootFile as $xSize x $ySize $imageType images."
+  # call the root macro in batch mode and tell it to quit when it's done
+  root -b -l -q "$plotMacro(\"$rootFile\",\"$imageType\",$xSize,$ySize)"
+}
+
+# Main method
+# Check how many arguments were given at the command line
+
+if [ $# -eq 0 ]; then
+  # No Arguments given
+
+  #for a in `ls | grep .root`; do
+  #  saveHistFromRootFile $a gif $defaultXsize $defaultYsize
+  #done
+  #exit
+  printUsage
+  exit 2
+else
+  # At least 1 argument given
+
+  rootFile=$1
+  imageType="gif"
+  xSize=$defaultXsize
+  ySize=$defaultYsize
+fi
+
+if [ $# -gt 0 ]; then
+  # At least 1 argument given
+  rootFile=$1
+fi
+if [ $# -gt 1 ]; then
+  # At least 2 arguments given
+  imageType=$2
+fi
+if [ $# -gt 3 ]; then
+  # At least 4 arguments given
+  xSize=$3
+  ySize=$4
+fi
+
+# Call the function given above
+saveHistFromRootFile $rootFile $imageType $xSize $ySize

@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# Usage:
+#   entryCount rootfile.root
+#   entryCount rootfile.root histogramName
+#   entryCount histogramName
+#
+# Michael Anderson
+# www.hep.wisc.edu/~mbanderson
+# April 16, 2008
+
+
+# This must point to the ROOT macro
+counterMacro=./entryCount.C
+
+# Grab the first two arguments if there are any given
+arg1=$1
+arg2=$2
+
+printUsage () {
+  echo "Please specify arguments like:"
+  echo "entryCount filename.root"
+  echo "entryCount histogramName"
+}
+
+
+# Check to make sure at least one
+#  argument was given.
+if [ -n "$arg1" ]; then
+
+  # See if two arguments were given
+  if [ -n "$arg2" ]; then
+
+    # See if argument 1 is a file
+    if ! [ -f "$arg1" ]; then
+      echo "ERROR: No such file: $arg1"
+      printUsage
+      exit 1
+    fi
+
+    # 2 arguments were given, pass both to root macro
+    root -b -l -q "$counterMacro(\"$arg1\",\"$arg2\")"
+
+  else
+
+    # Only 1 argument was given, pass it to root macro
+    root -b -l -q "$counterMacro(\"$arg1\")"
+
+  fi
+
+else
+  # No arguments were given
+  printUsage
+fi

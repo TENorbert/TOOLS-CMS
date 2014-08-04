@@ -1,0 +1,29 @@
+Executable =/data/whybee1a/user/norbert/GMSBAnalysis/2014-GMSB-GGM-DPAnalysis/CMSSW_6_1_1/src/GMSB_HEBEAMHALOSTUDY/Photon_Analysis_Limit_Setting/PLotting_Tools/HiggsCombined/Run_With_Condor/runUpperLimits.sh
+Universe = vanilla
+Output =/local/cms/user/norbert/GMSBAnalysis/UpperLimits/runUlimits.out
+Error  =/local/cms/user/norbert/GMSBAnalysis/UpperLimits/runUlimits.error
+Log    =/local/cms/user/norbert/GMSBAnalysis/UpperLimits/runUlimits.log
+request_memory = 1200
+Requirements = (Arch=="X86_64") && (Machine != "zebra01.spa.umn.edu" && Machine != "zebra02.spa.umn.edu" && Machine != "zebra03.spa.umn.edu" && Machine != "zebra04.spa.umn.edu" && Machine != "caffeine.spa.umn.edu") && (Machine != "gc1-ce.spa.umn.edu" && Machine != "gc1-hn.spa.umn.edu" && Machine != "gc1-se.spa.umn.edu" && Machine != "red.spa.umn.edu" && Machine != "hadoop-test.spa.umn.edu")
++CondorGroup="cmsfarm"
+
+Arguments = dpho_counting_ctau_250.txt  HiggsCombineOutput.txt 250
+Queue
+
+Arguments = dpho_counting_ctau_500.txt  HiggsCombineOutput.txt 500
+Queue
+
+Arguments = dpho_counting_ctau_1000.txt  HiggsCombineOutput.txt 1000
+Queue
+
+Arguments = dpho_counting_ctau_2000.txt  HiggsCombineOutput.txt 2000
+Queue
+
+Arguments = dpho_counting_ctau_3000.txt  HiggsCombineOutput.txt 3000
+Queue
+
+Arguments = dpho_counting_ctau_4000.txt  HiggsCombineOutput.txt 4000
+Queue
+
+Arguments = dpho_counting_ctau_6000.txt  HiggsCombineOutput.txt 5000
+Queue

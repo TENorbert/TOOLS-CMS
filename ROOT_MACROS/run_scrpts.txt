@@ -1,0 +1,67 @@
+Setup an CMSSW build up (in this case 3.6.1.patch3)
+scram p CMSSW CMSSW_3_6_1_patch3
+
+source /local/cms/sw/cmsset_default.sh
+
+setup command (compiler et. al.) (must be in working directory)
+eval `scram runtime -sh`
+
+Condor things
+
+results output 
+# /data/whybee0c/user/norbert/
+
+condor status
+condor_q
+
+computers running tasks
+condor_q -run
+
+run scripts
+condor_filelist.perl configfile.py filelist.txt #filesperjob    //complete location directory of txt file
+
+user priority (lower number is better)
+condor_userprio
+
+Combine histograms
+MergeTFileServiceHistograms -i [files.root] -o [outputfile.root]
+
+Combining Histograms after Produced from condor
+Must be in the directory of where histograms have been produced
+
+hadd NewHistogramname.root  OldHistogramnames*.root or OldHistogramnames?.root
+
+Fit Hist commands
+TDirectory* td=_file0->Get("demo")  
+td->ls()
+TH1* h=td->Get("HB Tower delta t corr") 
+.p h
+h->Fit("gaus")
+
+To use
+
+   1.
+      Do scramv1 runtime -[c]sh as normal
+   2.
+      Use condor_cmsRun instead of cmsRun to run your job (you can give multiple python files to condor_cmsRun on one commandline).
+   3.
+      Use condor_q to check the status of your jobs
+
+Warnings
+ 
+ To run task with condor use:
+condor_q cmsRun
+
+ To  Analyse graphs in Root.
+
+ Write a  name.C   macro and then on your root terminal:
+
+ call   root -l NameOfYourRootFile.root
+when it is attached the
+ execute the file by
+.X name.C( _file0,_file1,_file2,......)
+ That is all.
+
+Using  Batch :
+ TO   change the Mod of your file from read only to read right do:
+chmod +x name of file

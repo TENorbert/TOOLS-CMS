@@ -1,0 +1,12 @@
+## Steps on How to Generate MC Samples Locally ################
+
+###### do ########
+cmsDriver.py GMSB-8-TeV/8-TeV-Samples/python/GMSB_Lambda180_CTau6000_8TeV_pythia6_cff.py -s GEN,SIM,DIGI,L1,DIGI2RAW,HLT,RAW2DIGI,RECO --conditions=START61_V11::All --datatier 'GEN-SIM-RECO' --eventcontent RECOSIM -n 3 --no_exec
+
+####### Gives you full generation to RECO of MC samples.
+###### You can split them as you want ########
+
+
+
+
+

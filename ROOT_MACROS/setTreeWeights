@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# Given a list of files and weights (cross sections)
+# this will do a SetWeight() on a TTree in those files.
+#
+# Usage:
+#   setTreeWeights fileOfFilenames treeName
+#
+# The "fileOfFilenames" should have two colums.
+# One column is the root file name, the other is the weight.
+# Example:
+#  file01.root 105.2
+#  file02.root 92.0
+#  file03.root 11.0
+#
+#
+# Michael Anderson
+# www.hep.wisc.edu/~mbanderson
+# June 11, 2008
+
+# This must point to the ROOT macro
+rootMacro=./setTreeWeights.C
+
+printUsage () {
+  echo "Please specify arguments like:"
+  echo "setTreeWeights fileList treeName"
+  echo ""
+  echo "Note, fileList must contain lines in format:"
+  echo "<file> <weight>"
+  echo "example:"
+  echo "Filename.root 1234.0"
+}
+
+# Check to make sure two arguments were given
+if [ $# -lt 2 ]; then
+  # No Arguments given
+  printUsage
+  exit 2
+else 
+  # At least 2 arguments given
+  root -b -l -q "$rootMacro(\"$1\",\"$2\")"
+fi

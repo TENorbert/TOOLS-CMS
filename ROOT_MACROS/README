@@ -1,0 +1,39 @@
+************************************************************
+ ____             _   __  __                          
+|  _ \ ___   ___ | |_|  \/  | __ _  ___ _ __ ___  ___ 
+| |_) / _ \ / _ \| __| |\/| |/ _` |/ __| '__/ _ \/ __|
+|  _ < (_) | (_) | |_| |  | | (_| | (__| | | (_) \__ \
+|_| \_\___/ \___/ \__|_|  |_|\__,_|\___|_|  \___/|___/
+
+
+These Root Macros are free for anyone to use and improve.  
+You are encouraged to add your own root macros - even if
+they are not "generically implimented." They may still
+provide a good example to others.
+
+
+To get a copy of these macros:
+
+  cvs co UserCode/RootMacros
+
+
+To add your own macro:
+
+  cvs co UserCode/RootMacros
+  cd UserCode/RootMacros/
+  cp /path/to/your/macro.C .
+  cvs add macro.C
+  cvs commit -m "This macro does X" macro.C
+
+
+To improve a macro:
+
+  cvs co UserCode/RootMacros
+  cd UserCode/RootMacros/
+    [edit a macro]
+  cvs commit -m "Added new feature X" macro.C
+
+
+
+Mike Anderson, Sept 8, 2008
+************************************************************

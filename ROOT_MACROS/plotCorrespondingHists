@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  exit
+fi
+
+counter=0;
+argString=`echo -n "("`
+for i in $* ; do
+  argString=`echo -n $argString"\"$i\""`
+  counter=$(($counter+1))
+  if [ $counter -lt $# ]; then argString=`echo -n "$argString,"`; fi
+done 
+argString=`echo -n $argString")"`
+
+root -b -q -l plotCorrespondingHists.C$argString
